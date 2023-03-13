@@ -4,7 +4,12 @@
  */
 package Utilities;
 
+
+
+
+import domainmodel.KhachHang;
 import java.util.List;
+
 import java.util.Properties;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,18 +30,19 @@ public class DBConnection {
         Configuration confi = new Configuration();
         Properties pro = new Properties();
         pro.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
-        pro.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=LapTrinhCity;trustServerCertificate=true");
+        pro.put(Environment.DRIVER,"com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        pro.put(Environment.URL, "jdbc:sqlserver://localhost;database=DU1_NHOM1;trustServerCertificate=true");
         pro.put(Environment.USER, "sa");
-        pro.put(Environment.PASS, "1");
+        pro.put(Environment.PASS, "123456");
         pro.put(Environment.SHOW_SQL, true);
         confi.setProperties(pro);
+        confi.addAnnotatedClass(KhachHang.class);
 
+//        confi.addAnnotatedClass(SanPham.class);
         ServiceRegistry ser = new StandardServiceRegistryBuilder().applySettings(confi.getProperties()).build();
         FACTORY = confi.buildSessionFactory(ser);
 
     }
-
     public static SessionFactory getseFactory() {
         return FACTORY;
     }
